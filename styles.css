@@ -310,15 +310,71 @@ body {
     .bio-container { font-size: 0.85rem; }
 }
 
-/* --- COOL ASS GLITCH --- */
+/* ===============================
+   GLOBAUX : GLITCH + NEON GLOW
+   =============================== */
+
+/* --- Keyframes Glitch --- */
 @keyframes glitch {
-  0% { text-shadow: 2px 0 red, -2px 0 blue; }
-  20% { text-shadow: -2px 0 red, 2px 0 blue; }
-  40% { text-shadow: 2px 0 red, -2px 0 blue; }
-  60% { text-shadow: -2px 0 red, 2px 0 blue; }
-  80% { text-shadow: 2px 0 red, -2px 0 blue; }
-  100% { text-shadow: none; }
+  0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+  20% { text-shadow: -2px 0 red, 2px 0 cyan; }
+  40% { text-shadow: 2px 0 cyan, -2px 0 red; }
+  60% { text-shadow: -2px 0 cyan, 2px 0 red; }
+  80% { text-shadow: 2px 0 red, -2px 0 cyan; }
+  100% { text-shadow: 0 0 #fff; }
 }
-#bio-text {
-  animation: glitch 2s infinite;
+
+/* --- Keyframes Neon Glow --- */
+@keyframes neonGlow {
+  from { text-shadow: 0 0 4px #fff, 0 0 10px #0ff; }
+  to { text-shadow: 0 0 8px #fff, 0 0 18px #0ff; }
+}
+
+/* --- Keyframes Blink Cursor --- */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* --- Classe curseur clignotant --- */
+.cursor {
+  font-weight: 700;
+  color: #7289da;
+  margin-left: 2px;
+  animation: blink 0.8s infinite;
+  text-shadow: 0 0 8px rgba(114,137,218,0.6);
+}
+
+/* --- Texte animé : glitch + neon glow --- */
+h1, h2, h3, h4, h5, h6, p, span, .username, .bio-text, .status-username, .activity-name {
+  animation: glitch 0.3s infinite, neonGlow 1.5s ease-in-out infinite alternate;
+  color: #fff;
+  text-shadow: 0 0 6px #fff, 0 0 12px #0ff, 0 0 18px #0ff;
+}
+
+/* --- Fade-in pour les éléments dynamiques --- */
+.fade {
+  opacity: 0;
+  animation: fadeIn 1.2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* --- Hover léger sur les icônes --- */
+.icon-row a {
+  transition: .2s ease-in-out;
+}
+
+.icon-row a:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+/* --- Overlay fade out --- */
+#overlay.fade-out {
+  opacity: 0;
+  transition: opacity .8s ease;
 }
