@@ -347,9 +347,9 @@ body {
 
 /* --- Texte animé : glitch + neon glow --- */
 h1, h2, h3, h4, h5, h6, p, span, .username, .avatar, .bio-text, .status-username, .activity-name {
-  animation: glitch 0.3s infinite, neonGlow 1.5s ease-in-out infinite alternate;
+  animation: glitch 1s infinite, neonGlow 1.5s ease-in-out infinite alternate;
   color: #fff;
-  text-shadow: 0 0 6px ##e6277a, 0 0 12px ##e6277a, 0 0 18px ##e6277a;
+  text-shadow: 0 0 6px #e6277a, 0 0 12px #e6277a, 0 0 18px #e6277a;
 }
 
 /* --- Fade-in pour les éléments dynamiques --- */
