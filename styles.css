@@ -87,9 +87,9 @@ body {
     margin: 0 auto;
 
     /* --- Nouveau style --- */
-    background: rgba(230, 39, 122, 0.2); /* rose transparent */
-    border: 2px solid #e6277a; /* bordure neon */
-    backdrop-filter: blur(10px); /* flou derrière le container */
+    background: rgba(232, 107, 161, 0.2); /* rose transparent */
+    border: 0.1px solid #e6277a; /* bordure neon */
+    backdrop-filter: blur(8px); /* flou derrière le container */
     box-shadow: 0 0 20px #e6277a, 0 0 40px #e6277a, 0 0 60px #e6277a; /* glow */
     text-align: center;
 }
