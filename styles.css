@@ -75,18 +75,23 @@ body {
 }
 
 /* --- MAIN CONTAINER --- */
+
 .main-container {
     width: 90%;
     max-width: 450px;
     padding: 30px 25px;
-    border: 2px solid #2d2d2d;
-    background: rgba(17,17,17,.85);
-    text-align: center;
     border-radius: 12px;
     position: relative;
     z-index: 1;
     display: none;
     margin: 0 auto;
+
+    /* --- Nouveau style --- */
+    background: rgba(230, 39, 122, 0.2); /* rose transparent */
+    border: 2px solid #e6277a; /* bordure neon */
+    backdrop-filter: blur(10px); /* flou derrière le container */
+    box-shadow: 0 0 20px #e6277a, 0 0 40px #e6277a, 0 0 60px #e6277a; /* glow */
+    text-align: center;
 }
 
 /* --- AVATAR --- */
@@ -314,15 +319,6 @@ body {
    GLOBAUX : GLITCH + NEON GLOW
    =============================== */
 
-/* --- Keyframes Glitch --- */
-@keyframes glitch {
-  0% { text-shadow: 2px 0 red, -2px 0 blue; }
-  20% { text-shadow: -2px 0 red, 2px 0 blue; }
-  40% { text-shadow: 2px 0 red, -2px 0 blue; }
-  60% { text-shadow: -2px 0 red, 2px 0 blue; }
-  80% { text-shadow: 2px 0 red, -2px 0 blue; }
-  100% { text-shadow: none; }
-}
 
 /* --- Keyframes Neon Glow --- */
 @keyframes neonGlow {
@@ -345,9 +341,9 @@ body {
   text-shadow: 0 0 8px rgba(114,137,218,0.6);
 }
 
-/* --- Texte animé : glitch + neon glow --- */
+/* --- Texte animé : neon glow --- */
 h1, h2, h3, h4, h5, h6, p, span, .username, .avatar, .bio-text, .status-username, .activity-name {
-  animation: glitch 2s infinite, neonGlow 1.5s ease-in-out infinite alternate;
+  animation: neonGlow 1.5s ease-in-out infinite alternate;
   color: #fff;
   text-shadow: 0 0 6px #fff, 0 0 12px #0ff, 0 0 18px #0ff;
 }
