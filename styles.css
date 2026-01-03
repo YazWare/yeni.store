@@ -309,3 +309,16 @@ body {
     .icon-row { gap: 8px; }
     .bio-container { font-size: 0.85rem; }
 }
+
+/* --- COOL ASS GLITCH --- */
+@keyframes glitch {
+  0% { text-shadow: 2px 0 red, -2px 0 blue; }
+  20% { text-shadow: -2px 0 red, 2px 0 blue; }
+  40% { text-shadow: 2px 0 red, -2px 0 blue; }
+  60% { text-shadow: -2px 0 red, 2px 0 blue; }
+  80% { text-shadow: 2px 0 red, -2px 0 blue; }
+  100% { text-shadow: none; }
+}
+#bio-text {
+  animation: glitch 2s infinite;
+}
