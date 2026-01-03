@@ -316,12 +316,12 @@ body {
 
 /* --- Keyframes Glitch --- */
 @keyframes glitch {
-  0% { text-shadow: 2px 0 red, -2px 0 cyan; }
-  20% { text-shadow: -2px 0 red, 2px 0 cyan; }
-  40% { text-shadow: 2px 0 cyan, -2px 0 red; }
-  60% { text-shadow: -2px 0 cyan, 2px 0 red; }
-  80% { text-shadow: 2px 0 red, -2px 0 cyan; }
-  100% { text-shadow: 0 0 #fff; }
+  0% { text-shadow: 2px 0 red, -2px 0 blue; }
+  20% { text-shadow: -2px 0 red, 2px 0 blue; }
+  40% { text-shadow: 2px 0 red, -2px 0 blue; }
+  60% { text-shadow: -2px 0 red, 2px 0 blue; }
+  80% { text-shadow: 2px 0 red, -2px 0 blue; }
+  100% { text-shadow: none; }
 }
 
 /* --- Keyframes Neon Glow --- */
@@ -347,7 +347,7 @@ body {
 
 /* --- Texte animé : glitch + neon glow --- */
 h1, h2, h3, h4, h5, h6, p, span, .username, .avatar, .bio-text, .status-username, .activity-name {
-  animation: glitch 1s infinite, neonGlow 1.5s ease-in-out infinite alternate;
+  animation: glitch 2s infinite, neonGlow 1.5s ease-in-out infinite alternate;
   color: #fff;
   text-shadow: 0 0 6px #e6277a, 0 0 12px #e6277a, 0 0 18px #e6277a;
 }
