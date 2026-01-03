@@ -326,8 +326,8 @@ body {
 
 /* --- Keyframes Neon Glow --- */
 @keyframes neonGlow {
-  from { text-shadow: 0 0 4px ##e6277a, 0 0 10px #0ff; }
-  to { text-shadow: 0 0 8px ##e6277a, 0 0 18px #0ff; }
+  from { text-shadow: 0 0 4px #e6277a, 0 0 10px #0ff; }
+  to { text-shadow: 0 0 8px #e6277a, 0 0 18px #0ff; }
 }
 
 /* --- Keyframes Blink Cursor --- */
