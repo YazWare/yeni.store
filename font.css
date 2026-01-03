@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'San Francisco';
+  src: url('SF-Pro-Display-Heavy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'San Francisco' !important;
+}
