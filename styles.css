@@ -420,4 +420,7 @@ body {
   animation: flicker 0.1s infinite;
 }
 
-
+/*anti-scrollbar*/
+body {
+  overflow: hidden;
+}
