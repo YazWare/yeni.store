@@ -9,41 +9,46 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Checkout ton repo principal (yeni.store)
       - name: Checkout main repo
         uses: actions/checkout@v3
         with:
-          submodules: false   # <-- IMPORTANT
+          submodules: false
 
+      # Deploy vers jaydes.fr
       - name: Deploy to jaydes.fr
         run: |
           set -e
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          
-          rm -rf temp
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.fr.git temp
-          
+
+          # Clone le repo miroir dans un dossier hors du repo principal
+          rm -rf /tmp/temp-jaydes.fr
+          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.fr.git /tmp/temp-jaydes.fr
+
+          # Copier le contenu depuis le repo principal (current dir) vers le miroir
           shopt -s extglob
-          cp -r !(temp|.github|CNAME) temp/
-          
-          cd temp
+          cp -r !( .github|CNAME ) /tmp/temp-jaydes.fr/
+
+          cd /tmp/temp-jaydes.fr
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
           git push
 
+      # Deploy vers jaydes.store
       - name: Deploy to jaydes.store
         run: |
           set -e
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          
-          rm -rf temp
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.store.git temp
-          
+
+          rm -rf /tmp/temp-jaydes.store
+          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.store.git /tmp/temp-jaydes.store
+
           shopt -s extglob
-          cp -r !(temp|.github|CNAME) temp/
-          
-          cd temp
+          cp -r !( .github|CNAME ) /tmp/temp-jaydes.store/
+
+          cd /tmp/temp-jaydes.store
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
           git push
