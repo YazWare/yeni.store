@@ -9,29 +9,48 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Étape 1 : Checkout ton repo principal
       - name: Checkout main repo
         uses: actions/checkout@v3
 
+      # Étape 2 : Deploy vers jaydes.fr
       - name: Deploy to jaydes.fr
         run: |
+          set -e
+          # Config Git
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.fr.git temp-jaydes.fr
+          
+          # Supprime dossier temp si existant
+          rm -rf temp
+          
+          # Clone du repo miroir
+          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.fr.git temp
+          
+          # Copier tout sauf .github et CNAME
           shopt -s extglob
-          cp -r !(temp-jaydes.fr|.github|CNAME) temp-jaydes.fr/
-          cd temp-jaydes.fr
+          cp -r !(temp|.github|CNAME) temp/
+          
+          # Commit & push
+          cd temp
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
           git push
 
+      # Étape 3 : Deploy vers jaydes.store
       - name: Deploy to jaydes.store
         run: |
+          set -e
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.store.git temp-jaydes.store
+          
+          rm -rf temp
+          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.store.git temp
+          
           shopt -s extglob
-          cp -r !(temp-jaydes.store|.github|CNAME) temp-jaydes.store/
-          cd temp-jaydes.store
+          cp -r !(temp|.github|CNAME) temp/
+          
+          cd temp
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
           git push
