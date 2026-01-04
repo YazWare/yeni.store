@@ -7,6 +7,7 @@ const mainContainer = document.querySelector(".main-container");
 const texts = [
     "yen",
     "i stole this whole layout",
+    "unprofitable",
     "epstein didn't kill himself",
     "larp"
 ];
