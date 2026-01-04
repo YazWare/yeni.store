@@ -31,4 +31,4 @@ function createSnowflake() {
   fall();
 }
 
-setInterval(createSnowflake, 200);
+setInterval(createSnowflake, 210);
