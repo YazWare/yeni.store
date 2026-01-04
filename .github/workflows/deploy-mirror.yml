@@ -18,7 +18,7 @@ jobs:
           git config --global user.email "actions@github.com"
           git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.fr.git temp-jaydes.fr
           shopt -s extglob
-          cp -r !(temp-jaydes.fr|.github) temp-jaydes.fr/
+          cp -r !(temp-jaydes.fr|.github|CNAME) temp-jaydes.fr/
           cd temp-jaydes.fr
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
@@ -30,7 +30,7 @@ jobs:
           git config --global user.email "actions@github.com"
           git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.store.git temp-jaydes.store
           shopt -s extglob
-          cp -r !(temp-jaydes.store|.github) temp-jaydes.store/
+          cp -r !(temp-jaydes.store|.github|CNAME) temp-jaydes.store/
           cd temp-jaydes.store
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
