@@ -11,7 +11,7 @@ const texts = [
     "i stole this whole layout",
     "unprofitable",
     "epstein didn't kill himself",
-    "larp"
+    "miserable"
 ];
 
 let currentText = 0;
