@@ -48,7 +48,21 @@ jobs:
           shopt -s extglob
           cp -r !( .github|CNAME ) /tmp/temp-jaydes.store/
 
-          cd /tmp/temp-jaydes.store
+
+        # Deploy vers jaydes.co.uk
+      - name: Deploy to jaydes.co.uk
+        run: |
+          set -e
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+
+          rm -rf /tmp/temp-jaydes.co.uk
+          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.co.uk.git /tmp/temp-jaydes.co.uk
+
+          shopt -s extglob
+          cp -r !( .github|CNAME ) /tmp/temp-jaydes.co.uk/
+
+          cd /tmp/temp-jaydes.co.uk
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
           git push
