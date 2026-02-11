@@ -12,6 +12,12 @@
 <video id="bg-video" loop autoplay playsinline disablepictureinpicture muted webkit-playsinline>
   <source src="https://files.catbox.moe/uoijyu.mp4" type="video/mp4">
 </video>
+<script>
+const v = document.getElementById("bg-video");
+v.muted = true;
+v.volume = 0;
+v.setAttribute("muted", ""); // extra force 😈
+</script>
 <audio autoplay loop>
   <source src="https://files.catbox.moe/p9amnp.mp3" type="audio/mpeg">
 </audio>
