@@ -9,18 +9,22 @@
 </head>
 <body>
 <div id="overlay"><div id="overlay-text">◛⑅·˚ ༘ ♡ 私はより良くなるように努めます</div></div>
-<video id="bg-video" loop autoplay playsinline disablepictureinpicture muted webkit-playsinline>
+<audio id="bg-audio" loop >
+  <source src="https://files.catbox.moe/p9amnp.mp3" type="audio/mpeg">
+</audio>
+<video id="bg-video" loop autoplay muted playsinline webkit-playsinline>
   <source src="https://files.catbox.moe/uoijyu.mp4" type="video/mp4">
 </video>
 <script>
 const v = document.getElementById("bg-video");
 v.muted = true;
 v.volume = 0;
-v.setAttribute("muted", ""); // extra force 😈
+
+document.addEventListener("click", () => {
+  const audio = document.getElementById("bg-audio");
+  audio.play();
+}, { once: true });
 </script>
-<audio autoplay loop>
-  <source src="https://files.catbox.moe/p9amnp.mp3" type="audio/mpeg">
-</audio>
 <div class="main-container fade">
 <div class="avatar"><img src="favicon.jpg" alt="profile"></div>
 <h1 class="username">♡ yen ♡</h1>
