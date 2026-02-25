@@ -48,6 +48,11 @@ jobs:
           shopt -s extglob
           cp -r !( .github|CNAME ) /tmp/temp-jaydes.store/
 
+          cd /tmp/temp-jaydes.store
+          git add .
+          git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
+          git push
+
 
         # Deploy vers jaydes.co.uk
       - name: Deploy to jaydes.co.uk
