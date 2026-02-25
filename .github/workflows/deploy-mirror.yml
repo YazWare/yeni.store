@@ -8,66 +8,44 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        include:
+          - repo: jaydes.fr
+            cname: jaydes.fr
+          - repo: jaydes.store
+            cname: jaydes.store
+          - repo: jaydes.co.uk
+            cname: jaydes.co.uk
+
     steps:
-      # Checkout ton repo principal (yeni.store)
       - name: Checkout main repo
         uses: actions/checkout@v3
-        with:
-          submodules: false
 
-      # Deploy vers jaydes.fr
-      - name: Deploy to jaydes.fr
+      - name: Deploy to mirror
         run: |
           set -e
+
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
 
-          # Clone le repo miroir dans un dossier hors du repo principal
-          rm -rf /tmp/temp-jaydes.fr
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.fr.git /tmp/temp-jaydes.fr
+          TARGET="/tmp/${{ matrix.repo }}"
 
-          # Copier le contenu depuis le repo principal (current dir) vers le miroir
-          shopt -s extglob
-          cp -r !( .github|CNAME ) /tmp/temp-jaydes.fr/
+          rm -rf $TARGET
+          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/${{ matrix.repo }}.git $TARGET
 
-          cd /tmp/temp-jaydes.fr
-          git add .
-          git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
-          git push
+          # Sync files safely (exclude unwanted files)
+          rsync -av \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='CNAME' \
+            ./ $TARGET/
 
-      # Deploy vers jaydes.store
-      - name: Deploy to jaydes.store
-        run: |
-          set -e
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
+          # Set correct CNAME for each mirror
+          echo "${{ matrix.cname }}" > $TARGET/CNAME
 
-          rm -rf /tmp/temp-jaydes.store
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.store.git /tmp/temp-jaydes.store
-
-          shopt -s extglob
-          cp -r !( .github|CNAME ) /tmp/temp-jaydes.store/
-
-          cd /tmp/temp-jaydes.store
-          git add .
-          git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
-          git push
-
-
-        # Deploy vers jaydes.co.uk
-      - name: Deploy to jaydes.co.uk
-        run: |
-          set -e
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-
-          rm -rf /tmp/temp-jaydes.co.uk
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/YazWare/jaydes.co.uk.git /tmp/temp-jaydes.co.uk
-
-          shopt -s extglob
-          cp -r !( .github|CNAME ) /tmp/temp-jaydes.co.uk/
-
-          cd /tmp/temp-jaydes.co.uk
+          cd $TARGET
           git add .
           git diff-index --quiet HEAD || git commit -m "Sync from yeni.store"
           git push
