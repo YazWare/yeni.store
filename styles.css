@@ -37,10 +37,9 @@ body {
     width: auto;
     height: auto;
     z-index: -2;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.8);
     object-fit: cover;
     pointer-events: none;
-    display: none;
 }
 
 /* --- OVERLAY --- */
